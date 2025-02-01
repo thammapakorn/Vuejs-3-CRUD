@@ -1,7 +1,7 @@
 <template>
   <div class="q-pa-md">
     <div class="q-py-md">
-      <q-btn icon="add"/>
+      <q-btn icon="add" @click="onCreate"/>
     </div>
     <q-table
       title="Treats"
@@ -29,6 +29,8 @@
 
 <script setup>
 import { ref } from 'vue';
+import router from '@/router';
+
 const columns = ref([
   // แก้หัว column
   { name: 'id', align: 'left', label: 'ID', field: 'id', sortable: true },
@@ -54,6 +56,9 @@ const onEdit = (id) =>{
 }
 const onDelete = (id) =>{
   alert(id+"delete")
+}
+const onCreate = () =>{
+  router.push('/create')
 }
   // ลำดับของตัวแปรต้องตรงกัน
   // {"id":1,"fname":"Karn","lname":"Yong","username":"karn.yong@melivecode.com","avatar":"https://www.melivecode.com/users/1.png"},
