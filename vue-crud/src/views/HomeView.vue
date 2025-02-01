@@ -1,5 +1,8 @@
 <template>
   <div class="q-pa-md">
+    <div class="q-py-md">
+      <q-btn icon="add"/>
+    </div>
     <q-table
       title="Treats"
       :rows="rows"
@@ -45,6 +48,13 @@ const fetchData = () =>{
   })
 }
 fetchData()
+
+const onEdit = (id) =>{
+  alert(id+"edit")
+}
+const onDelete = (id) =>{
+  alert(id+"delete")
+}
   // ลำดับของตัวแปรต้องตรงกัน
   // {"id":1,"fname":"Karn","lname":"Yong","username":"karn.yong@melivecode.com","avatar":"https://www.melivecode.com/users/1.png"},
   // {"id":2,"fname":"Ivy","lname":"Cal","username":"ivy.cal@melivecode.com","avatar":"https://www.melivecode.com/users/2.png"},
