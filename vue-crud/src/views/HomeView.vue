@@ -11,16 +11,25 @@
 
 
 <script setup>
-const columns = [
+import { ref } from 'vue';
+const columns = ref([
   // แก้หัว column
   { name: 'id', align: 'left', label: 'ID', field: 'id', sortable: true },
   { name: 'fname', label: 'left', label: 'fname', field: 'fname', sortable: true},
   { name: 'lname', label: 'left', label: 'lname', field: 'lname', sortable: true},
   { name: 'username', label: 'left', label: 'username', field: 'username', sortable: true},
   { name: 'avatar', label: 'center', label: 'avatar', field: 'avatar'}
-]
+])
 
-const rows = [
+const rows = ref([])
+const fetchData = () =>{
+  fetch("https://www.melivecode.com/api/users")
+  .then(res => res.json())
+  .then((result)=>{
+    rows.value = result;
+  })
+}
+fetchData()
   // ลำดับของตัวแปรต้องตรงกัน
   // {"id":1,"fname":"Karn","lname":"Yong","username":"karn.yong@melivecode.com","avatar":"https://www.melivecode.com/users/1.png"},
   // {"id":2,"fname":"Ivy","lname":"Cal","username":"ivy.cal@melivecode.com","avatar":"https://www.melivecode.com/users/2.png"},
@@ -32,16 +41,7 @@ const rows = [
   // {"id":8,"fname":"Diego","lname":"Greene","username":"diego.greene@melivecode.com","avatar":"https://www.melivecode.com/users/8.png"},
   // {"id":9,"fname":"Izzie","lname":"Mooney","username":"izzie.mooney@melivecode.com","avatar":"https://www.melivecode.com/users/9.png"},
   // {"id":10,"fname":"Romeo","lname":"Garner","username":"romeo.garner@melivecode.com","avatar":"https://www.melivecode.com/users/10.png"} 
-]
 
-export default {
-  setup () {
-    return {
-      columns,
-      rows
-    }
-  }
-}
 </script>
 
 <style>
