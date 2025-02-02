@@ -16,29 +16,58 @@
 <script setup>
 import { ref } from "vue";
 import { useRoute } from "vue-router";
+import router from "@/router";
+
 const route = useRoute();
 
 const id = ref(route.params.id);
-const fname = ref('');
-const lname = ref('');
-const username = ref('');
-const password = ref('');
-const email = ref('');
-const avatar = ref('');
+const fname = ref("");
+const lname = ref("");
+const username = ref("");
+const password = ref("");
+const email = ref("");
+const avatar = ref("");
 
 const fetchData = () => {
-  fetch("https://www.melivecode.com/api/users/"+id.value)
-    .then(res => res.json())
+  fetch("https://www.melivecode.com/api/users/" + id.value)
+    .then((res) => res.json())
     .then((result) => {
-      fname.value = result.user.fname
-      lname.value = result.user.lname
-      username.value = result.user.username
-      password.value = result.user.password
-      email.value = result.user.email
-      avatar.value = result.user.avatar
-    })
+      fname.value = result.user.fname;
+      lname.value = result.user.lname;
+      username.value = result.user.username;
+      password.value = result.user.password;
+      email.value = result.user.email;
+      avatar.value = result.user.avatar;
+    });
 };
 fetchData();
 
-const onSubmit = () => {};
+const onSubmit = () => {
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  const raw = JSON.stringify({
+    id: id.value,
+    fname: fname.value,
+    lname: lname.value,
+    username: username.value,
+    password: password.value,
+    email: email.value,
+    avatar: avatar.value,
+  });
+
+  const requestOptions = {
+    method: "PUT",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow",
+  };
+
+  fetch("https://www.melivecode.com/api/users/update", requestOptions)
+    .then((response) => response.json())
+    .then((result) => {
+      alert(result.message);
+    })
+    .catch((error) => console.error(error));
+};
 </script>
