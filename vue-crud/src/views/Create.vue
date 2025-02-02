@@ -14,16 +14,44 @@
 
 <script setup>
 import { ref } from "vue";
+import router from "@/router";
 
 // ข้อมูล API จาก https://www.melivecode.com/
-const fname = ref('Cat')
-const lname = ref('Chat')
-const username = ref('cat.chat@melivecode.com')
-const password = ref('1234')
-const email = ref('cat.chat@melivecode.com')
-const avatar = ref('https://www.melivecode.com/users/cat.png')
+const fname = ref("Cat");
+const lname = ref("Chat");
+const username = ref("cat.chat@melivecode.com");
+const password = ref("1234");
+const email = ref("cat.chat@melivecode.com");
+const avatar = ref("https://www.melivecode.com/users/cat.png");
 
 const onSubmit = () => {
-    alert(fname.value)
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  const raw = JSON.stringify({
+    fname: fname.value,
+    lname: lname.value,
+    username: username.value,
+    password: password.value,
+    email: email.value,
+    avatar: avatar.value,
+  });
+
+  const requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow",
+  };
+
+  fetch("https://www.melivecode.com/api/users/create", requestOptions)
+    .then((response) => response.json())
+    .then(result => {
+      alert(result.message)
+      if (result.status === 'ok'){
+        router.push('/')
+      }
+    })
+    .catch((error) => console.error(error));
 };
 </script>
