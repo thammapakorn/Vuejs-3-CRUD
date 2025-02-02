@@ -68,7 +68,7 @@ const fetchData = () => {
 fetchData();
 
 const onEdit = (id) => {
-  alert(id + "edit");
+  router.push('/update')
 };
 const onDelete = (id) => {
   const myHeaders = new Headers();
