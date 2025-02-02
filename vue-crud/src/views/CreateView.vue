@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-md" style="max-width: t00px">
+  <div class="q-pa-md" style="max-width: 400px">
     <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
       <q-input v-model="fname" label="First Name" />
       <q-input v-model="lname" label="Last Name" />
